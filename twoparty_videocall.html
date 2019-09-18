@@ -1,0 +1,205 @@
+<html lang=en>
+<head>
+    <title>WebRTC Call</title>
+    <meta name="google-site-verification" content="8NqEkVsX8mkRCn13Qov4K0njgF0T6t97_a-NZNIXkpE" />
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/elfbfompfpakbefoaicaeoabnnoihoac">
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet href="minScripts/webrtcdevelopment_header.css">
+    <script src="minScripts/webrtcdevelopment_header.js"> </script>
+    
+</head>
+
+<body id="pagebody">
+
+    <div class="container-fluid">
+
+        <!-- ................................ top panel ....................... -->
+        <div class="row topPanelClass" >    
+            <div id="topIconHolder" >
+                <ul id="topIconHolder_ul">
+                    <li hidden> <span id="username" class="userName" hidden>a</span></li>
+                    <li hidden> <span id="numbersofusers" class="numbers-of-users" hidden></span></li>
+                    <li> <span id="HelpButton" class="btn btn-info glyphicon glyphicon-question-sign topPanelButton" data-toggle="modal" data-target="#helpModal" > Help </span> </li>
+                    <li> <span id="SettingsButton" class="btn btn-info glyphicon glyphicon-exclamation-sign topPanelButton" data-toggle="modal" data-target="#settingsModal" > Settings </span> </li>
+                    <!-- <li id="timerli" hidden> Time Remaining <span id="countdownMinutes">3</span>:<span id="countdownSecond">60</span></li>  -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- ............. ................... alerts......................... -->
+        
+        <div class="row alertDiv" id="alertBox" hidden="true"></div>
+
+        <!-- .......................... Row 2 ................................ -->
+        <div class="row thirdPanelClass"> 
+            <div class="col-xs-12 videoBox merge" id="videoHold">
+                <div class="row users-container merge" id="usersContainer" >
+
+                        <!-- when no remote -->
+                        <div id="singleVideoContainer" class="row" hidden>
+                            <div class="col-sm-2 merge text-success" > Waiting  ! </div>
+                            <div class="col-sm-8 merge "> <video name="myAloneVideo" autoplay="autoplay" muted="true" /></div>
+                            <div class="col-sm-2 merge text-info" > You are the only one in the session ...</div>
+                        </div>
+
+                        <!-- when remote is connected -->
+                        <div id ="confVideoContainer"  class="row" hidden >
+                            <div class="col-sm-4 merge" class="leftVideoClass" id="userVideo">
+                                <video name="myConferenceVideo" autoplay="autoplay" muted="true" />
+                            </div>
+
+                            <div class="col-sm-4 merge" class="rightVideoClass" id="othersVideo">
+                                <video name="otherConferenceVideo" autoplay="autoplay" />
+                            </div>
+
+                            <div class="col-sm-4 merge">
+                                <div class="row chatContainerClass" id="chatContainer"> </div>
+                            </div>
+                        </div>
+                </div>
+            </div> 
+        </div>
+
+        <!-- .......................... Row 3 ................................ -->
+        
+        <div class="row fourthPanelClass"> 
+            <div class="col-xs-12 filesharingBox merge" >
+                <div id="fileSharingRow" class="row fileSharingRow"> </div>
+                <div id="fileListingRow" class="row fileSharingRow"> </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<script src="property.js"></script>
+<link rel=stylesheet href="minScripts/webrtcdevelopment.css">
+<!-- <script src="scripts/_screenshare.js"></script>  -->
+<!-- <script src="minScripts/webrtcdevelopment.js"></script> -->
+<script src="scripts/getMediaElement.js"></script>
+
+<script src="scripts/_init.js"></script>
+<script src="scripts/RTCMultiConnection.js"></script>
+<script src="scripts/_screenshare.js"></script>
+<script src="scripts/_detectRTC.js"></script>
+<script src="scripts/_settings.js"></script>
+<script src="scripts/firebase.js"></script>
+<script src="scripts/FileBufferReader.js"></script>
+<script src="scripts/MediaStreamRecorder.js"></script>
+<script src="scripts/RecordRTC.js"></script>
+<script src="scripts/screenshot.js"></script>
+<script src="scripts/_snapshot.js"></script>
+<script src="scripts/_geolocation.js"></script>
+<script src="scripts/_chat.js"></script>
+<script src="scripts/_notify.js"></script>
+<script src="scripts/_mediacontrol.js"></script>
+<script src="scripts/_record.js"></script>
+<script src="scripts/_screenrecord.js"></script>
+<script src="scripts/_filesharing.js"></script>
+<script src="scripts/_draw.js"></script>
+<script src="scripts/_redial.js"></script>
+<script src="scripts/_cursor.js"></script>
+<script src="scripts/_codeeditor.js"></script>
+<script src="scripts/_texteditor.js"></script>
+<script src="scripts/_turn.js"></script>
+<script src="scripts/_timer.js"></script>
+<script src="scripts/_stats.js"></script>
+<script src="scripts/start.js"></script> 
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38614709-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+$('document').ready(function(){
+    init(true , function (sessionid){
+        
+        var webrtcdomobj;
+        var local={
+            video: "myAloneVideo",
+            videoClass:"",
+            videoContainer : "singleVideoContainer",
+            userDisplay:true,
+            userMetaDisplay:false,
+            userdetails:{
+                username:"Expert",
+                usercolor: "#DDECEF",
+                useremail: "abc@gmail.com"
+            }
+        };
+
+        var remote={
+            videoarr: ["myConferenceVideo", "otherConferenceVideo"],
+            videoClass:"",
+            maxAllowed: "2",
+            videoContainer : "confVideoContainer",
+            userDisplay:true,
+            userMetaDisplay:false,
+            dynamicVideos: false 
+        };
+
+        webrtcdomobj= new WebRTCdom(
+            local,remote, incoming, outgoing
+        );
+
+        var session ={
+            sessionid : sessionid,
+            socketAddr: "/",
+            turn:"none"
+        };
+        
+        var incoming={
+            audio:  true,
+            video:  true,
+            data:   true,
+            screen: true
+        };
+
+        var outgoing={
+            audio:  true,
+            video:  true,
+            data:   true,
+            screen: true
+        };
+
+        var widgets={
+            mute    :{
+                        active: true,
+                        audio   :{
+                                active: false,
+                                button:{
+                                    class_on:"pull-right glyphicon glyphicon-volume-up btn btn-default mediaButton",
+                                    html_on:"",
+                                    class_off:"pull-right glyphicon glyphicon-volume-off btn btn-danger mediaButton",
+                                    html_off:""
+                                }
+                            },
+                        video : {
+                                active: true,
+                                button:{
+                                    class_on:"pull-right glyphicon glyphicon-eye-open btn btn-default videoButtonClass mediaButton",
+                                    html_on:"",
+                                    class_off:"pull-right glyphicon glyphicon-eye-close  btn btn-danger videoButtonClass mediaButton",
+                                    html_off:""
+                                }
+                            }
+                    }
+        };
+
+        var webrtcdevobj = new WebRTCdev ( 
+            session, widgets
+        );
+        startCall(webrtcdevobj);
+    });
+});
+</script>
+</html>

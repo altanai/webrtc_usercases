@@ -1,0 +1,82 @@
+<html lang=en>
+<head>
+    <title>WebRTC Call</title>
+    <meta name="google-site-verification" content="8NqEkVsX8mkRCn13Qov4K0njgF0T6t97_a-NZNIXkpE" />
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/fpbpheeciohmabdiffbhhjadopklgabo">
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet href="minScripts/webrtcdevelopment_header.css">
+    <script src="minScripts/webrtcdevelopment_header.js"> </script>
+</head>
+
+<body id="pagebody">
+
+                <div id="settingsContainer" class="row">
+
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills nav-stacked">
+                          <li class="active"><a href="#">URL's</a></li>
+                          <li><a href="#">Media Streams</a></li>
+                          <li><a href="#">Session Information</a></li>
+                          <li><a href="#">Debug</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5 container">
+                        <div class="row">
+                            <h4> URL to be Shared </h4>
+
+                            <div style="display: inline-flex;" style=" float: left;padding-left: 100px; padding-bottom: 10px;">
+                                <div>Listen-In</div> 
+                                <input class="form-control" type="text" id="inspectorlink" style="width:600px" readonly><br/>
+                            </div>
+                            </br>
+
+                            <div style="display: inline-flex;" style=" float: left;padding-left: 100px; padding-bottom: 10px;">
+                                <div>Partner</div> 
+                                <input class="form-control" type="text" id="partnername" style="width:200px"><br/>
+                                <button class="btn" id="btnAddPartner" onclick="AddPartner()">Add</button>
+                                <br/><input class="form-control" type="text" id="partnerlink" readonly><br/>
+                            </div>                         
+                        </div>
+
+                        <div class="row">
+                            <h4>Session Information </h4>
+                            Channel <input class="form-control" type="text" id="channelname" readonly> <br/>
+                            User Id <input class="form-control" type="text" id="userid" readonly> <br/>
+                        </div>
+
+                        <div class="row">
+                            <div class="row">
+                                <h4>Outgoing</h4>
+                                <input type="checkbox" id="inAudio" checked data-toggle="toggle" data-on="Audio On" data-off="Audio Off" data-onstyle="success" data-offstyle="danger">
+                                <input type="checkbox" id="inVideo" checked data-toggle="toggle" data-on="Video On" data-off="Video Off" data-onstyle="success" data-offstyle="danger">
+                                <input type="checkbox" id="inData" checked data-toggle="toggle" data-on="Data On" data-off="Data Off" data-onstyle="success" data-offstyle="danger">
+                                <input type="checkbox" id="inScreen" checked data-toggle="toggle" data-on="Screen On" data-off="Screen Off" data-onstyle="success" data-offstyle="danger">
+                            </div>
+
+                            <div class="row">
+                                <h4>Incoming</h4>
+                                <input type="checkbox" id="outAudio" checked data-toggle="toggle" data-on="Audio On" data-off="Audio Off" data-onstyle="success" data-offstyle="danger">
+                                <input type="checkbox" id="outVideo" checked data-toggle="toggle" data-on="Video On" data-off="Video Off" data-onstyle="success" data-offstyle="danger">
+                                <input type="checkbox" id="outData" checked data-toggle="toggle" data-on="Data On" data-off="Data Off" data-onstyle="success" data-offstyle="danger">
+                                <input type="checkbox" id="outScreen" checked data-toggle="toggle" data-on="Screen On" data-off="Screen Off" data-onstyle="success" data-offstyle="danger">                   
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <button class="btn" id="btnGetPeers">Get Peers Info</button>
+                            <button class="btn" id="btnDebug">Debug</button>
+                        </div> 
+
+                    </div>
+
+                    <div id="allpeerinfo" style="text-align: left;"></div>
+                    <div id="allwebrtcdevinfo" style="text-align: left;"></div>
+
+                </div>
+
+
+    </div>
+
+</body>
+</html>

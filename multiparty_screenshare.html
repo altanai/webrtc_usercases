@@ -1,0 +1,411 @@
+<html lang=en>
+<head>
+    <title>WebRTC Call</title>
+
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel=stylesheet href="minScripts/webrtcdevelopment_header.css">
+    <script src="minScripts/webrtcdevelopment_header.js"> </script>  
+
+</head>
+
+<body id="pagebody">
+
+    <div  id="elementToShare" class="container-fluid">
+
+        <!-- ................................ top panel ....................... -->
+        <div class="row topPanelClass" >    
+            <div id="topIconHolder" >
+                <ul id="topIconHolder_ul">
+                    <li hidden> <span id="HelpButton" class="btn btn-info glyphicon glyphicon-question-sign topPanelButton" data-toggle="modal" data-target="#helpModal" > Help </span> </li>
+                    <li hidden> <span id="SettingsButton" class="btn btn-info glyphicon glyphicon-exclamation-sign topPanelButton" data-toggle="modal" data-target="#settingsModal" > Settings </span> </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- .............alerts................. -->
+        
+        <div class="row" id="alertBox" hidden="true"></div>
+
+        <!-- .......................... Row 1 ................................ -->
+        
+        <textarea id="widget-texteditorContainer" class="row secondPanelClass" hidden style="margin-top:40px; height: 300px; width: 700px;"> 
+        </textarea> 
+
+        <div id="widget-codeeditorContainer" class="row secondPanelClass code-area" hidden style="margin-top:40px; height: 300px; width: 700px;">
+              <div class="wrapper-1">
+                  <span>Select Language :</span>
+                  <select id="CodeStyles"> </select>
+              </div>
+
+              <textarea id="codeArea" name="code" class="codeArea" style="height: 300px; width: 700px;">
+
+                x = findMax(1, 123, 500, 115, 44, 88);
+
+                function findMax() {
+                    var i;
+                    var max = -Infinity;
+                    for (i = 0; i < arguments.length; i++) {
+                        if (arguments[i] > max) {
+                            max = arguments[i];
+                        }
+                    }
+                    return max;
+                }
+              </textarea>
+        </div>
+
+        <!-- .......................... Row 2 ................................ -->
+        <div class="row thirdPanelClass"> 
+
+            <!-- when no remote -->
+            <div id="singleVideoContainer" class="row" hidden>
+                <div class="col-sm-2 merge" > Waiting  ! </div>
+                <div class="col-sm-8 merge "> <video name="myAloneVideo" autoplay="autoplay" muted="true" /></div>
+                <div class="col-sm-2 merge" > You are the only one in the session ...</div>
+            </div>
+
+            <!-- when remote is connected -->
+            <div id ="confVideoContainer" class="conatiner" hidden>
+                <div class="col-sm-4 merge" class="leftVideoClass" id="userVideo">
+                    <video name="myConferenceVideo" autoplay="autoplay" muted="true" />
+                </div>
+
+                <div class="col-sm-4 merge" class="rightVideoClass" id="othersVideo" >
+                </div>
+
+                <div class="col-sm-4 merge">
+                    <div class="row chatContainerClass" id="chatContainer"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- .......................... Row 3 ................................ -->
+        
+        <div class="row fourthPanelClass"> 
+            <div class="col-xs-12 filesharingBox merge" >
+                <div id="fileSharingRow" class="row fileSharingRow"> </div>
+            </div>
+        </div>
+
+        <br/><br/>
+
+        <!-- .......................... Row 4 ................................ -->
+        
+        <div class="row fifthPanelClass"> 
+            <div class="col-xs-12 filesharingBox merge" >
+                <div id="fileListingRow" class="row">  </div>
+            </div>
+        </div>
+
+        <!-- ....................................................................... -->
+
+        <!--modal help -->
+        <div class="modal fade" id="helpModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Help</h4>
+                </div>
+                <div class="modal-body">
+                  <p>WebRTC (web, real-time communications) is – a browser-based, application programming interface (API) – leveraging JavaScript & HTML5, it enables developers to build apps capable of delivering – simultaneous voice/video/data sharing capability – using a browser with no plug-ins for peer-to – peer communications..</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!--modal settings -->
+        <div class="modal fade" id="settingsModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Settings</h4>
+                </div>
+
+                <div class="modal-body">
+                  <div id="settingsContainer">
+
+                    Inspectore <input class="form-control" type="text" id="inspectorlink" readonly><br/>
+                    Channel <input class="form-control" type="text" id="channelname" readonly> <br/>
+                    User Id <input class="form-control" type="text" id="userid" readonly> <br/>
+
+                    <div class="row">
+                        <h2>Outgoing</h2>
+                        <div style="display: inline-flex;">
+                            <div>Audio</div> <input class="form-control" type="text" id="inAudio" style="width:100px" readonly><br/>
+                        </div>
+                        
+                        <div style="display: inline-flex;">
+                            <div>Video</div> <input class="form-control" type="text" id="inVideo" style="width:100px" readonly><br/>
+                        </div>
+
+                        <div style="display: inline-flex;">
+                            Data <input class="form-control" type="text" id="inData" style="width:100px" readonly><br/>
+                        </div>
+
+                        <div style="display: inline-flex;">
+                            Screen <input class="form-control" type="text" id="inScreen" style="width:100px" readonly><br/>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <h2>Incoming</h2>
+                        <div style="display: inline-flex;">
+                            <div>Audio</div> <input class="form-control" type="text" id="outAudio" style="width:100px" readonly><br/>
+                        </div>
+                        
+                        <div style="display: inline-flex;">
+                            <div>Video</div> <input class="form-control" type="text" id="outVideo" style="width:100px" readonly><br/>
+                        </div>
+
+                        <div style="display: inline-flex;">
+                            Data <input class="form-control" type="text" id="outData" style="width:100px" readonly><br/>
+                        </div>
+
+                        <div style="display: inline-flex;">
+                            Screen <input class="form-control" type="text" id="outScreen" style="width:100px" readonly><br/>
+                        </div>                    
+                    </div>                    
+
+                    <div class="row">
+                         <button class="btn" id="btnGetPeers">Get Peers Info</button>
+                         <button class="btn" id="btnDebug">Debug</button>
+                    </div> 
+
+                    <div id="allpeerinfo" style="text-align: left;"></div>
+                    <div id="allwebrtcdevinfo" style="text-align: left;"></div>
+
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="property.js"></script>
+
+<link rel=stylesheet href="minScripts/webrtcdevelopment.css">
+<script src="minScripts/webrtcdevelopment.js"></script>
+<script src="minScripts/codeEditorScript.js"></script>
+<link rel=stylesheet href="minScripts/codeEditorCss.css">
+
+<script src="scripts/start.js"></script>
+
+<script>
+$('document').ready(function(){
+
+    sessionid= init(true);
+    var webrtcdomobj;
+
+    var local={
+        video: "myAloneVideo",
+        videoClass:"",
+        videoContainer : "singleVideoContainer",
+        userDisplay:false,
+        userMetaDisplay:false,
+        userdetails:{
+            username:"Participant",
+            usercolor: "gray",
+            useremail: "abc@gmail.com"
+        }
+    };
+
+    var remote={
+        videoarr: ["myConferenceVideo"],
+        maxAllowed: "unlimited",
+        videoContainer : "confVideoContainer",
+        videoClass:"",
+        userDisplay:false,
+        userMetaDisplay:false,
+        dynamicVideos: {
+            videoContainer:"othersVideo"
+        }
+    };
+
+    var incoming={
+        audio:  true,
+        video:  true,
+        data:   true,
+        screen: true
+    };
+
+    var outgoing={
+        audio:  true,
+        video:  true,
+        data:   true,
+        screen: true
+    };
+
+    webrtcdomobj= new WebRTCdom(
+        local, remote , incoming, outgoing
+    );
+
+
+    var session ={
+        sessionid : sessionid,
+        socketAddr: props.signaller,
+        turn:{
+                username    : props.xirsys.username,
+                secretkey   : props.xirsys.secretkey,
+                domain      : props.xirsys.domain,
+                application : props.xirsys.application,
+                room        : props.xirsys.room,
+                secure      : props.xirsys.secure
+            }
+    };
+
+    var arrLang=    [ '<option mime="text/x-csrc" mode="clike" value="1">C</option>',
+                     '<option mime="text/x-c++src" mode="clike" value="2">C++</option>' ,
+                     '<option mime="text/css" mode="css" value="4">CSS</option> ',
+                     '<option mime="application/x-aspx" mode="htmlembedded" value="11">ASP.NET</option>', 
+                     '<option mime="text/html" mode="htmlmixed" value="12">HTML</option> ',
+                     '<option mime="text/java" mode="clike" value="14">Java</option> ',
+                     '<option mime="text/javascript" mode="javascript" value="16">Javascript</option>',  
+                     '<option mime="application/json" mode="javascript" value="17">JSON</option> ']
+    var widgets={
+        chat    :{
+                        active: true,
+                        chatContainer: "chatContainer",
+                        button:{
+                            class_on:"btn btn-warning glyphicon glyphicon-font topPanelButton",
+                            html_on:"Chat",
+                            class_off:"btn btn-success glyphicon glyphicon-font topPanelButton",
+                            html_off:"Chat"
+                        }
+                },
+        fileShare   :{
+                        active : true,
+                        fileShareContainer : "fileSharingRow",
+                        fileListContainer : "fileListingRow",
+                        button:{
+                            class:"btn btn-success glyphicon glyphicon-file topPanelButton",
+                            html:"File"
+                        },
+                        props:{
+                            fileShare:"single",
+                            fileList:"single"
+                        }
+                    },
+        screenshare : {
+                        active:true,
+                        screenshareContainer: "widget-screenshareContainer",
+                        extensionID: props.extensionID,
+                        button:{
+                            installButton:{
+                                class_on:"btn btn-warning glyphicon glyphicon-inbox topPanelButton",
+                                html_on:"Stop Install",
+                                class_off:"btn btn-success glyphicon glyphicon-inbox topPanelButton",
+                                html_off:"Install Screen Share"
+                            },
+                            shareButton:{
+                                class_on:"btn btn-warning  glyphicon glyphicon-expand topPanelButton",
+                                html_on:"Stop Sharing",
+                                class_off:"btn btn-success glyphicon glyphicon-expand topPanelButton",
+                                html_off:"ScreenShare"
+                            },
+                            viewButton:{
+                                class_on:"btn btn-warning  glyphicon glyphicon-expand topPanelButton",
+                                html_on:"Stop Viewing",
+                                class_off:"btn btn-success glyphicon glyphicon-expand topPanelButton",
+                                html_off:"View Screen"
+                            }
+                        }
+                    },
+        screenrecord:{
+                        active: true,
+                        autoscreenrecord:false,
+                        screenrecordContainer: null,
+                        button:{
+                            class_on:"btn btn-warning glyphicon glyphicon-refresh topPanelButton",
+                            html_on:"Stop",
+                            class_off:"btn btn-success glyphicon glyphicon-refresh topPanelButton",
+                            html_off:"Record"
+                        }
+                    }, 
+        videoRecord :{
+                        active: true,
+                        videoRecordContainer: true,
+                        button:{
+                            class_on:"pull-right glyphicon glyphicon-facetime-video btn btn-warning mediaButton",
+                            html_on:"Stop",
+                            class_off:"pull-right glyphicon glyphicon-facetime-video btn btn-default mediaButton",
+                            html_off:"Record"
+                        }
+                    },
+        snapshot :{
+                        active: true,
+                        snapshotContainer: true,
+                        button:{
+                            class_on:"pull-right glyphicon glyphicon-camera btn btn-default mediaButton",
+                            html_on:"Snapshot"
+                        }
+                    }, 
+        texteditor  :{
+                        active: true,
+                        texteditorContainer: "widget-texteditorContainer",
+                        button:{
+                            class_on:"btn btn-warning glyphicon glyphicon-edit topPanelButton",
+                            html_on:"close Text",
+                            class_off:"btn btn-success glyphicon glyphicon-edit topPanelButton",
+                            html_off:"Text"
+                        }
+                    },  
+        codeeditor  :{
+                        active: true,
+                        codeeditorContainer: "widget-codeeditorContainer",
+                        languages:arrLang,
+                        button:{
+                            class_on:"btn btn-warning glyphicon glyphicon-align-left topPanelButton",
+                            html_on:"close Coder",
+                            class_off:"btn btn-success glyphicon glyphicon-align-left topPanelButton",
+                            html_off:"Coder"
+                        }
+                    },
+        mute    :{
+                    active: true,
+                    audio   :{
+                            active: true,
+                            button:{
+                                class_on:"pull-right glyphicon glyphicon-volume-up btn btn-default mediaButton",
+                                html_on:"Audio",
+                                class_off:"pull-right glyphicon glyphicon-volume-off btn btn-danger mediaButton",
+                                html_off:"Audio"
+                            }
+                        },
+                    video : {
+                            active: true,
+                            button:{
+                                class_on:"pull-right glyphicon glyphicon-eye-open btn btn-default videoButtonClass mediaButton",
+                                html_on:"Video",
+                                class_off:"pull-right glyphicon glyphicon-eye-close  btn btn-danger videoButtonClass mediaButton",
+                                html_off:"Video"
+                            }
+                        }
+                }
+    };
+
+    var webrtcdevobj = new WebRTCdev ( 
+        session,  widgets
+    );
+    startcall(webrtcdevobj);
+});
+</script>
+
+
+</html>

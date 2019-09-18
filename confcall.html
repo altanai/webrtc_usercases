@@ -1,0 +1,261 @@
+<html lang=en>
+<head>
+    <title>WebRTC Call</title>
+    <meta name="google-site-verification" content="8NqEkVsX8mkRCn13Qov4K0njgF0T6t97_a-NZNIXkpE" />
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet href="minScripts/mainStyle.css">
+
+    <script src="minScripts/presentationScript.js"> </script>
+    <script src="property.js"></script>
+    <style type="text/css">
+        video{
+            width:100% !important;
+        }
+        body{
+            background: #2B2B2B;
+        }
+    </style>
+</head>
+
+<body id="pagebody">
+
+    <div  id="elementToShare" class="container-fluid">
+
+        <!-- ................................ top panel ....................... -->
+        <div class="row topPanelClass" >    
+            <div id="topIconHolder" >
+                <ul id="topIconHolder_ul">
+                    <li hidden> <span id="username" class="userName" hidden>a</span></li>
+                    <li hidden> <span id="numbersofusers" class="numbers-of-users" hidden></span></li>
+                    <li> <span id="HelpButton" class="btn btn-info glyphicon glyphicon-question-sign topPanelButton" data-toggle="modal" data-target="#helpModal" > Help </span> </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- .............alerts................. -->
+        
+        <div class="row" id="alertBox" hidden="true"></div>
+
+        <!-- .......................... Row 1 ................................ -->
+        
+        <div class="row secondPanelClass" hidden> 
+            <div class="col-xs-12 filesharingBox merge" >
+                <div class="row">
+                    <div class="col-sm-6 drawBox">
+                        <div id="widget-container" class="row drawBoard"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- .......................... Row 2 ................................ -->
+        <div class="row thirdPanelClass"> 
+            <div class="col-xs-8 videoBox merge" id="videoHold">
+                <div class="row users-container merge" id="usersContainer" >
+                    <div class="CardClass" id="card">
+                        
+                        <!-- when no remote -->
+                        <div id="local" class="row" hidden="">
+                            <video name="localVideo" autoplay="autoplay" muted="true" />
+                        </div>
+
+                        <!-- when remote is connected -->
+                        <div id ="remote" class="row" style="display:inline" hidden>
+                            <div class="col-sm-4 merge" class="leftVideoClass" id="leftVideo">
+                                <video name="video1" hidden autoplay="autoplay" muted="true" ></video>
+                            </div>
+                            <div class="col-sm-4 merge" class="rightVideoClass" id="rightVideo" >
+                                <video name="video2" hidden autoplay="autoplay" ></video>
+                            </div>
+                        </div>
+
+                        <!-- when no remote -->
+                        <div id="screenshare" hidden=true class="screenshareVideoClass">
+                        </div>
+
+                    </div>
+                </div>
+            </div> 
+            <div class="col-xs-4 merge">
+            
+                <div class="row" style="height:80%">
+
+                    <div  id="chatBoard"  contenteditable class="chatMessagesClass">
+                        <div id="all-messages" style="padding:5px;"></div>
+                    </div>
+
+                    <p id="who-is-typing" hidden></p>
+                
+                    <div class="mainInputBox" >   
+                        <button id="send" class="form-control btn-primary buttonChatSend">Send</button>
+                        <input type=text style="width:70%;" id="chatInput" class="form-control" placeholder="Type message here">
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="fileinputClass" style="position:absolute" data-provides="fileinput">
+                        <span class="btn btn-default btn-file"><input id="file" type="file" /></span>
+                    </div> 
+                </div>
+
+                <div id="fileListingRow" class="row">  
+                </div>
+
+            </div>
+        </div>
+
+        <!-- .......................... Row 3 ................................ -->
+        <div class="row fourthPanelClass"> 
+            <div class="col-xs-12 filesharingBox merge" >
+                <div id="fileSharingRow" class="row fileSharingRow"> </div>
+            </div>
+        </div>
+
+        <br/><br/>
+        <!-- .......................... Row 4 ................................ -->
+        
+        <div class="row fifthPanelClass"> 
+            <div class="col-xs-12 filesharingBox merge" >
+                <div id="fileListingRow" class="row">  </div>
+            </div>
+        </div>
+
+    
+        <!--modal help -->
+
+        <div class="modal fade" id="helpModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Help</h4>
+                </div>
+                <div class="modal-body">
+                  <p>This is a for helping the user .</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<script src="minScripts/snapshotRecord.js"></script>
+<script src="minScripts/mainScript.js"></script>
+<script src="scripts/start.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38614709-4', 'auto');
+  ga('send', 'webrtc development pageview');
+</script>
+
+<script>
+$('document').ready(function(){
+
+    sessionid= init(true);
+
+    var searchParams = new URLSearchParams(window.location);
+    var role="participant",out_A=true, out_V=true ;
+    var webrtcdomobj;
+
+    if(searchParams.get('audio')=="0"){
+        out_A=false;
+    }
+
+    if(searchParams.get('video')=="0"){
+        out_V=false;
+    }
+
+    if(searchParams.get('role')=="inspector"){
+        role=searchParams.get('role');
+
+        var local={
+            localVideo: null,
+            videoClass:"",
+            userDisplay:false,
+            userMetaDisplay:false  
+        };
+
+        var remote={
+            remotearr: ["video1" , "video2"],
+            videoClass:"",
+            userDisplay:false,
+            userMetaDisplay:false    
+        };
+
+        webrtcdomobj= new WebRTCdom(
+            local, remote
+        );    
+        
+        sessionid = sessionid.substring(0,sessionid.indexOf("appname") );
+    }else{
+        var local={
+            localVideo: "localVideo",
+            videoClass:"",
+            userDisplay:false,
+            userMetaDisplay:false  
+        };
+
+        var remote={
+            remotearr: ["video1" , "video2"],
+            videoClass:"",
+            userDisplay:false,
+            userMetaDisplay:false    
+        };
+
+        webrtcdomobj= new WebRTCdom(
+            local,remote
+        );
+    } 
+
+    var session ={
+        sessionid : sessionid,
+        socketAddr: "https://localhost:8084/"
+    };
+
+    var incoming={
+        audio: true,
+        video: true,
+        data: true,
+        screen: true
+    };
+
+    var outgoing={
+        audio: out_A,
+        video: out_V,
+        data: true,
+        screen: true
+    };
+
+    var widgets={
+        chat        :{
+                       active: true,
+                       chatContainer: ""
+                    },
+        fileShare   : true,
+        screenrecord: false,
+        screenshare : false,
+        videoRecord : false, 
+        drawCanvas  : false,
+        reconnect   : false
+    };
+
+    var webrtcdevobj = new WebRTCdev ( 
+        session,  incoming,  outgoing ,  widgets
+    );
+
+    startcall();
+});
+</script>
+</html>

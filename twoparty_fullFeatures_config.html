@@ -1,0 +1,267 @@
+<html lang=en>
+<head>
+    <title>WebRTC Call config</title>
+    <meta name="google-site-verification" content="8NqEkVsX8mkRCn13Qov4K0njgF0T6t97_a-NZNIXkpE" />
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/fpbpheeciohmabdiffbhhjadopklgabo">
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet href="minScripts/webrtcdevelopment_header.css">
+    <script src="minScripts/webrtcdevelopment_header.js"> </script>
+</head>
+
+<body id="pagebody">
+
+    <div  id="elementToShare" class="container-fluid">
+
+
+      
+      
+    </div>
+
+</body>
+
+
+<script>
+
+  $('document').ready(function(){
+
+      init(true , function(sessionid){
+      var searchParams = new URLSearchParams(window.location);
+      var role="participant",out_A=true, out_V=true ;
+
+      if(searchParams.get('audio')=="0"){
+          out_A=false;
+      }
+
+      if(searchParams.get('video')=="0"){
+          out_V=false;
+      }
+
+      if(searchParams.get('name')){
+          username=searchParams.get('name');
+      }else{
+          username="Expert";
+      }
+
+      if(searchParams.get('email')){
+          useremail=searchParams.get('email');
+      }else{
+          useremail="abc@gmail.com";
+      }
+
+      var webrtcdomobj;
+
+      console.log("searchParams" , searchParams);
+
+      var local={
+          video: "myAloneVideo",
+          videoClass:"video-class",
+          videoContainer : "singleVideoContainer",
+          userDisplay:false,
+          userMetaDisplay:false,
+          userdetails:{
+              username: username,
+              usercolor: "#DDECEF",
+              useremail: useremail
+          }
+      };
+
+      var remote={
+          videoarr: ["myConferenceVideo", "otherConferenceVideo"],
+          videoClass:"video-class",
+          maxAllowed: "6",
+          videoContainer : "confVideoContainer",
+          userDisplay:false,
+          userMetaDisplay:false,
+          dynamicVideos: false 
+      };
+
+      var incoming={
+          audio:  false,
+          video:  true,
+          data:   true,
+          screen: true
+      };
+
+      var outgoing={
+          audio:  false,
+          video:  true,
+          data:   true,
+          screen: true
+      };
+
+      webrtcdomobj= new WebRTCdom(
+          local, remote, incoming, outgoing
+      );
+
+
+      var session ={
+          sessionid : sessionid,
+          socketAddr: props.signaller,
+          turn:{
+                  username    : props.xirsys.username,
+                  secretkey   : props.xirsys.secretkey,
+                  domain      : props.xirsys.domain,
+                  application : props.xirsys.application,
+                  room        : props.xirsys.room,
+                  secure      : props.xirsys.secure
+              }
+      };
+      
+      var widgets={
+          debug      : false,
+          reconnect   :{
+                          active: true,
+                          button:{
+                              id: "reconnectBtn",
+                              class:"btn btn-success glyphicon glyphicon-refresh topPanelButton",
+                              html:"Reconnect",
+                              resyncfiles:false
+                          }
+                      },
+          timer      :{
+                          active:false,
+                          type: "backward",
+                          upperlimit: {
+                              hour:0 , 
+                              min: 3 , 
+                              sec: 0 
+                          },
+                          span:{
+                              currentTime_id:"currentTimeArea",
+                              currentTimeZonr_id:"currentTimeZoneArea",
+                              class_on:""
+                          },
+                          container:{
+                              id:'timeContainer',
+                              minbutton_id:'minimizeTimerButton'
+                          },
+                      },
+          chat    :{
+                          active: true,
+                          container: {
+                              id: "chatContainer"
+                          },
+                          inputBox:{
+                              text_id:"chatInputText",
+                              sendbutton_id:"chatSendButton",
+                              minbutton_id:"minimizeChatButton"
+                          },
+                          chatBox:{
+                              id: "chatBoard"
+                          },
+                          button:{
+                              class_on:"btn btn-warning glyphicon glyphicon-font topPanelButton",
+                              html_on:"Chat",
+                              class_off:"btn btn-success glyphicon glyphicon-font topPanelButton",
+                              html_off:"Chat"
+                          }
+                  },
+          fileShare :{
+                        active : true,
+                        fileShareContainer : "fileSharingRow",
+                        fileListContainer : "fileListingRow",
+                        button:{
+                            id: "fileshareBtn",
+                            class:"btn btn-success glyphicon glyphicon-file topPanelButton",
+                            html:"File"
+                        },
+                        props:{
+                            fileShare:"divided",   //Can be divided , chatpreview  , single   , hidden 
+                            fileList:"divided"     //Can be divided , single   , hidden
+                        }
+                    },
+          mute    :{
+                      active: true,
+                      audio   :{
+                              active: true,
+                              button:{
+                                  class_on:"pull-right btn btn-modify-video2 videoButtonClass on",
+                                  html_on:"<i class='fa fa-microphone'></i>",
+                                  class_off:"pull-right btn btn-modify-video2 videoButtonClass off",
+                                  html_off:"<i class='fa fa-microphone'></i>"
+                              }
+                          },
+                      video : {
+                              active: true,
+                              button:{
+                                  class_on:"pull-right btn btn-modify-video2 videoButtonClass on",
+                                  html_on:"<i class='fa fa-video-camera'></i>",
+                                  class_off:"pull-right btn btn-modify-video2 videoButtonClass off",
+                                  html_off:"<i class='fa fa-video-camera'></i>"
+                              }
+                          }
+                  },
+          videoRecord :{
+                          active: true,
+                          videoRecordContainer: true,
+                          button:{
+                              class_on:"pull-right btn btn-modify-video2 videoButtonClass on",
+                              html_on:"<i class='fa fa-circle' title='Stop recording this Video'></i>",
+                              class_off:"pull-right btn btn-modify-video2 videoButtonClass off",
+                              html_off:"<i class='fa fa-circle' title='Record this Video'></i>"
+                          }
+                      },
+          snapshot :{
+                          active: true,
+                          snapshotContainer: true,
+                          button:{
+                              class_on:"pull-right btn btn-modify-video2 videoButtonClass",
+                              html_on:"<i class='fa fa-th-large' title='Take a snapshot'></i>"
+                          }
+                      }, 
+          cursor :{
+                      active : false,
+                      button:{
+                          id: 'shareCursorButton',
+                          class_on:"pull-right btn btn-modify-video2 videoButtonClass",
+                          html_on:"<i class='fa fa-th-large' title='Cursor'></i>"
+                      }                   
+                  },
+
+          screenrecord:{
+                    active : true,
+                    videoRecordContainer: true,
+                    button:{
+                        id: 'scrRecordButton',
+                        class_on:"btn btn-warning  glyphicon glyphicon-expand topPanelButton on",
+                        html_on:"Stop Recording",
+                        class_off:"btn btn-success glyphicon glyphicon-expand topPanelButton off",
+                        html_off:"Record"
+                    }
+                },
+
+          screenshare : {
+                          active:true,
+                          screenshareContainer: "screenShareRow",
+                          extensionID: props.extensionID,
+                          button:{
+                              installButton:{
+                                  id:"scrInstallButton",
+                                  class_on:"screeninstall-btn on",
+                                  html_on:"Stop Install",
+                                  class_off:"screeninstall-btn off",
+                                  html_off:"Install Screen Share"
+                              },
+                              shareButton:{
+                                  id:"scrShareButton",
+                                  class_on:"screen-btn on",
+                                  html_on:"Stop Sharing",
+                                  class_off:"screen-btn off",
+                                  html_off:"ScreenShare"
+                              },
+                              viewButton:{
+                                  id:"scrViewButton",
+                                  class_on:"btn btn-warning  glyphicon glyphicon-expand topPanelButton on",
+                                  html_on:"Stop Viewing",
+                                  class_off:"btn btn-success glyphicon glyphicon-expand topPanelButton off",
+                                  html_off:"View Screen"
+                              }
+                          }
+                      },
+      };
+
+
+  });
+</script>
+</html>

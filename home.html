@@ -1,0 +1,238 @@
+<html lang=en>
+<head>
+    <title>WebRTC Call</title>
+    <meta name="google-site-verification" content="8NqEkVsX8mkRCn13Qov4K0njgF0T6t97_a-NZNIXkpE" />
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/elfbfompfpakbefoaicaeoabnnoihoac">
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet href="minScripts/webrtcdevelopment_header.css">
+    <script src="minScripts/webrtcdevelopment_header.js"> </script>
+   <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+    .fork-right {
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 290px;
+        height: 290px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: url('home_images/forkme.png');
+    }
+  </style>   
+</head>
+
+<body id="pagebody" class="bodyWhole">
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '144771182399738',
+          xfbml      : true,
+          version    : 'v2.6'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+     
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Portfolio</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="admin.html">Admin</a></li>
+            <li><a href="sourcecode.html">Source Code</a></li>
+            <li><a href="https://about.me/altanai">Contact</a></li>
+          </ul>
+            <!-- 
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              </ul> 
+            -->
+        </div>
+      </div>
+    </nav>
+
+    <a href="https://github.com/altanai/webrtc" class="fork-right"></a>
+
+    <div class="jumbotron">
+      <div class="container text-center">
+        <h1>WebRTC Development</h1>
+        <p>Webrtc libraries and set of ready to use services , cabe be hosted right off-the-shelf </p>
+      </div>
+    </div>
+
+    <div
+      class="fb-like"
+      data-share="true"
+      data-width="450"
+      data-show-faces="true">
+    </div>
+
+    <div class="container-fluid bg-3 text-center">
+        <h3>Services Listing</h3><br>
+        <div class="row">
+
+            <h4>Two Party Usecases</h4>
+        
+            <div class="col-sm-3">
+                <a href="twoparty_videocall.html">
+                    <p>Two-party Video Call</p>
+                    <img src="https://s20.postimg.org/sfpldm82l/two_party_call.png" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+            
+            <div class="col-sm-3">
+                <a href="twoparty_videocall.html">
+                    <p>Two-party video call + chat + file sharing + recording </p>
+                    <img src="https://s20.postimg.org/poz1fui8t/multiparty_filetransfer.png" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+            
+            <div class="col-sm-3">
+                <a href="twoparty_screenshare.html">
+                    <p>Screenshare</p>
+                    <img src="https://s20.postimg.org/d92bm3owt/multiparty_screenshare.jpg" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+            
+            <div class="col-sm-3">
+                <a href="twoparty_texteditor.html">
+                    <p>Two-party Complete two party elearning solution</p>
+                    <img src="https://s20.postimg.org/izx3dkmal/two_party_elearning.png" class="img-responsive" style="width:100%" alt="Image">
+                <a href="twoparty_fullFeatures.html">
+            </div>
+        </div>
+        
+        <div class="row">
+            
+            <h4>Multiparty Usecases</h4>
+
+            <div class="col-sm-3">
+                <a href="multiparty_videocall.html">
+                  <p>Multi party Video Call</p>
+                  <img src="https://s20.postimg.org/qcf65y89p/Multiparty_party_call.png" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+
+            <div class="col-sm-3">
+                <a href="multiparty_videochatfile.html">
+                    <p>Multi party Call + Chat , File and Record </p>
+                    <img src="https://s20.postimg.org/tqg4liajh/two_party_chat.png" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+            
+            <div class="col-sm-3">
+                <a href="multiparty_fullfeatures.html">
+                    <p>Multiparty Call + Widgets Draw , Cursor Sync , Text Editor </p>
+                    <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+            
+            <div class="col-sm-3">
+                <a href="multiparty_videochatfile.html">
+                    <p>Multi Conference Room</p>
+                    <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-3">
+                <a href="multiparty_codeeditor.html">
+                  <p>Multi party Code Editor</p>
+                  <img src="https://s20.postimg.org/qcf65y89p/Multiparty_party_call.png" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+
+            <div class="col-sm-3">
+                <a href="multiparty_videochatfile.html">
+                    <p>Chess Game </p>
+                    <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+            
+            <div class="col-sm-3">
+                <a href="multiparty_fullfeatures.html">
+                    <p>Minutes of Meeting</p>
+                    <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+            
+            <div class="col-sm-3">
+                <a href="multiparty_screenshare">
+                    <p>Screenshare</p>
+                    <img src="https://s20.postimg.org/d92bm3owt/multiparty_screenshare.jpg" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <h4> Admin </h4>
+            <div class="col-sm-3">
+                <a href="admin.html">
+                    <p>Control Dashboard</p>
+                    <img src="https://s20.postimg.org/v6w8he2u5/webrtcadmin.jpg" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+            </div>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3">
+            </div>
+        </div>
+
+    </div>
+  
+  <br>
+
+  <div class="container-fluid bg-3 text-center">
+
+  </div>
+
+  <br><br>
+
+<footer class="container-fluid text-center">
+  <p>Open source Software  - 2016 ( altanai - https://altanaitelecom.wordpress.com )</p>
+</footer>
+</body>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38614709-4', 'auto');
+  ga('send', 'webrtc development pageview');
+</script>
+
+
+</html>

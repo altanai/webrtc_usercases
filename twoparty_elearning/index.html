@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>online schooling</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel=stylesheet href="/minScripts/webrtcdevelopment_header.css">
+    <script src="/minScripts/webrtcdevelopment_header.js"> </script>
+  <style>
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 {
+      background-color: #ffffff; /* White */
+      color: #555555;
+  }
+  .bg-4 {
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar">a</span>
+        <span class="icon-bar">b</span>
+        <span class="icon-bar">c</span>
+      </button>
+      <a class="navbar-brand" href="#">Online Schooling</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Become a Teacher</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center" style="position:relative">
+
+  <div style="position:absolute"> 
+    <h3> Register Today for the next Summe rBatch 2016-2017</h3>
+    <p> Get Started : Register for a course today . </p>
+  </div>
+
+  <img src="flat-design-office-desk-o.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" >
+  
+</div>
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">How to get started ?</h3>
+  <p>It is simple just fill out the form and we shall find the best teacher for you </p>
+      Name <input class="form-control" type="text" id="inspectorlink" readonly><br/>
+      Class <input class="form-control" type="text" id="channelname" readonly> <br/>
+      Contact <input class="form-control" type="text" id="userid" readonly> <br/>
+      Language Preference <input class="form-control" type="text" id="userid" readonly> <br/>
+      Country <input class="form-control" type="text" id="userid" readonly> <br/>
+      City <input class="form-control" type="text" id="userid" readonly> <br/>
+      <a href="#" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-search"></span> Search
+      </a>
+</div>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3 text-center">
+  <h3 class="margin">Create a session with any of the teachers</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <p>Subjects : Maths , Physics </p>
+      <p>Qualifications: M.Sc Science from MIT</p>
+      <img src="teacher1.jpg" class="img-responsive margin" style="width:300px;height:200px" alt="Image">
+      <div>
+        <p>Available Now </p>
+        <span id="startButton" class="btn btn-info glyphicon glyphicon-exclamation-sign topPanelButton" data-toggle="modal" data-target="#settingsModal" > Start </span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+        <p>Subjects : Maths , Physics </p>
+        <p>Qualifications: M.Sc Science from MIT</p>
+        <img src="teacher2.jpg" class="img-responsive margin" style="width:300px;height:200px" alt="Image">
+    </div>
+    <div class="col-sm-4">
+        <p>Subjects : Maths , Physics </p>
+        <p>Qualifications: M.Sc Science from MIT</p>
+        <img src="teacher3.jpg" class="img-responsive margin" style="width:300px;height:200px" alt="Image">
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="settingsModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">E Learning</h4>
+      </div>
+
+      <div class="modal-body">
+        <div id="settingsContainer">
+
+          <div class="row">
+            <div id="topIconHolder" >
+                <ul id="topIconHolder_ul">
+                    <li hidden> <span id="username" class="userName" hidden>a</span></li>
+                    <li hidden> <span id="numbersofusers" class="numbers-of-users" hidden></span></li>
+                    <!-- <li id="timerli" hidden> Time Remaining <span id="countdownMinutes">3</span>:<span id="countdownSecond">60</span></li>  -->
+                </ul>
+            </div>
+          </div>
+
+          <div class="row" id="alertBox" hidden="true"></div>
+          
+
+            <div class="row users-container merge" id="usersContainer" >
+
+                  <!-- when no remote -->
+                  <div id="local" class="row" hidden>
+                      <div class="col-sm-4 merge"> </div>
+                      <div class="col-sm-4 merge"> <video name="localVideo" autoplay="autoplay" muted="true" /></div>
+                      <div class="col-sm-4 merge"> </div>
+                  </div>
+
+                  <!-- when remote is connected -->
+                  <div id ="remote" class="row" style="display:inline" hidden>
+                      <div class="col-sm-4 merge" class="leftVideoClass" id="leftVideo">
+                          <video name="video1" autoplay="autoplay" muted="true" />
+                      </div>
+                      <div class="col-sm-4 merge "  style="height:100%" id="chatbox" >
+                          <div class="row">
+
+                              <div class="mainInputBox">   
+                                  <button id="send">Send</button>
+                                  <input type=text style="width:70%;" id="chatInput" class="form-control" placeholder="Type message here">
+                              </div>
+
+                              <div  id="chatBoard"  contenteditable class="chatMessagesClass">
+                                  <div id="all-messages" style="padding:5px;"></div>
+                              </div>
+                              <p id="who-is-typing" hidden></p>
+
+                              <div class="fileinputClass" style="position:absolute" data-provides="fileinput">
+                                  <span class="btn btn-default btn-file"><input id="file" type="file" /></span>
+                              </div>
+
+                          </div>
+                      </div>
+                      <div class="col-sm-4 merge" class="rightVideoClass" id="rightVideo">
+                      </div>
+                  </div>
+            </div>                 
+              
+
+          <div class="row">
+               <button class="btn" id="btnGetPeers">Get Peers Info</button>
+               <button class="btn" id="btnDebug">Debug</button>
+          </div> 
+
+          <div id="allpeerinfo" style="text-align: left;"></div>
+          <div id="allwebrtcdevinfo" style="text-align: left;"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>online schooling 2016 ( Note this is a sample WEBRTC based elearning site ) </p>
+</footer>
+
+</body>
+    <link rel=stylesheet href="/minScripts/webrtcdevelopment_header.css">
+    <script src="/minScripts/webrtcdevelopment_header.js"> </script>
+</html>
+
