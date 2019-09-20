@@ -6,9 +6,15 @@ install npm module for webrtc development
 ```
 npm install webrtcdevelopment
 ```
-include the js into project 
+include the css and js header files into project 
 ```
-
+<link rel=stylesheet href="node_modules/webrtcdevelopment/client/build/webrtcdevelopment_header.css">
+<script src="node_modules/webrtcdevelopment/client/build/webrtcdevelopment_header.js"> </script>
+```
+indlude the main scripts 
+```
+<link rel=stylesheet href="node_modules/webrtcdevelopment/client/build/webrtcdevelopment.css">
+<script src="node_modules/webrtcdevelopment/client/build/webrtcdevelopment.js"></script>
 ```
 
 ## Secure HTTP server to mount the website 
@@ -26,6 +32,17 @@ Available on:
   https:192.168.1.101:8080
   https:192.168.1.104:8080
 Hit CTRL-C to stop the server
+
+or use directly the fake keys supplied in project 
+```
+$ http-server --ssl  -C fake-keys/certificate.pem -K fake-keys/privatekey.pem -o 
+Starting up http-server, serving ./ through https
+Available on:
+  https://127.0.0.1:8080
+  https://192.168.0.3:8080
+Hit CTRL-C to stop the server
+
+```
 
 ## Secure nodejs socket.io server to mount the signaller 
 

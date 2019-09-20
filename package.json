@@ -1,7 +1,7 @@
 {
-  "name": "webrtcquick",
+  "name": "webrtc_uasecases",
   "version": "1.0.0",
-  "description": "quicly start a webrtc video Call session ",
+  "description": "Usecases around a webrtc video Call session ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
