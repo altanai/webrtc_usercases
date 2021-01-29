@@ -13,6 +13,6 @@
   "author": "altanai",
   "license": "ISC",
   "dependencies": {
-    "webrtcdevelopment": "^3.0.0"
+    "webrtcdevelopment": "^6.7.4"
   }
 }
